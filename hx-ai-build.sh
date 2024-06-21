@@ -5,15 +5,6 @@ MAIN_DIR="$(pwd)"
 
 mkdir -p approot/{bin,lib,opt,usr/lib/helix}
 
-# # Install musl libc
-# MUSL_VER='musl-1.2.5.tar.gz'
-# wget -O- "https://musl.libc.org/releases/$MUSL_VER" | tar -zxv
-# (
-# 	cd "$(basename "$MUSL_VER" .tar.gz)"
-# 	./configure --prefix="$MAIN_DIR/approot" --syslibdir="$MAIN_DIR/approot/lib" || exit
-# 	make -j16 install-libs || exit
-# )
-
 # Install nodejs
 NODE_VER='v20.14.0'
 rm -rf "approot/node-$NODE_VER-linux-x64"
