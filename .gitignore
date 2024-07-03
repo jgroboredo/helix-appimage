@@ -1,0 +1,6 @@
+*
+!.gitignore
+!/hx-ai-build.sh
+!/build.sh
+!/Dockerfile
+!/config.toml
