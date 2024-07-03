@@ -20,6 +20,7 @@ fi
 	cargo build --release || exit
 	cd ..
 	cp -r runtime ../approot/usr/lib/helix/runtime 
+	cp -r ../config.toml ../approot/usr/lib/helix/config.toml
 	rm -rf ../approot/usr/lib/helix/runtime/grammars/sources
 	cp target/release/hx ../approot/bin/hx
 	cp contrib/Helix.desktop ../approot/Helix.desktop
@@ -29,7 +30,7 @@ fi
 (
 	echo '#!/bin/bash'
 	echo 'APPDIR="$(dirname "$(readlink -f "${0}")")"'
-	echo "HELIX_RUNTIME=\"\$APPDIR/usr/lib/helix/runtime\" PATH=\"\$APPDIR/bin:\$APPDIR/node-$NODE_VER-linux-x64/bin:\$PATH\" \"\$APPDIR/bin/hx\" \"\$@\""
+	echo "HELIX_RUNTIME=\"\$APPDIR/usr/lib/helix/runtime\" PATH=\"\$APPDIR/bin:\$APPDIR/node-$NODE_VER-linux-x64/bin:\$PATH\" \"\$APPDIR/bin/hx\" -c \"\$APPDIR/usr/lib/helix/config.toml\" \"\$@\""
 ) > approot/AppRun
 chmod +x approot/AppRun
 
