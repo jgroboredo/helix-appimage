@@ -19,17 +19,15 @@ auto-signature-help = false
 display-signature-help-docs = false
 snippets = false
 
+[editor.explorer]
+column-width = 30
+
 [editor.file-picker]
 hidden = false
 
 [editor.indent-guides]
 render = true
 character = "▏"
-
-# [editor.explorer]
-# column-width = 23
-# style = "tree"
-# position = "embed"
 
 [keys.normal]
 "A-]" = [":bc"]
