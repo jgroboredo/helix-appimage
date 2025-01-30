@@ -12,7 +12,7 @@ wget -O- "https://nodejs.org/dist/$NODE_VER/node-$NODE_VER-linux-x64.tar.xz" | t
 
 # Install helix
 if [[ ! -d helix-editor ]]; then
-	git clone https://github.com/sploders101/helix-editor || exit
+	git clone --branch personal https://github.com/sploders101/helix-editor || exit
 fi
 (
 	cd helix-editor/helix-term
