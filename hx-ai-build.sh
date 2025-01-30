@@ -45,6 +45,8 @@ rm -r approot/node-$NODE_VER-linux-x64/include
 
 test -f approot/bin/rhai || \
 	cargo install --git https://github.com/rhaiscript/rhai-lsp.git --rev 2f1fcd73f43b909d1d5e96123516e599b9aaaa88 rhai-cli --root approot
+test -f approot/bin/ruff || \
+	cargo install --git https://github.com/astral-sh/ruff.git --tag 0.9.4 ruff --root approot
 
 if [[ ! -e appimagetool-x86_64.AppImage ]]; then
 	wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
