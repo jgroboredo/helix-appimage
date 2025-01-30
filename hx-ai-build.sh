@@ -43,15 +43,8 @@ export PATH="$(pwd)/approot/bin:$(pwd)/approot/node-$NODE_VER-linux-x64/bin:$PAT
 	@ansible/ansible-language-server perlnavigator-server intelephense awk-language-server emmet-ls
 rm -r approot/node-$NODE_VER-linux-x64/include
 
-if [[ ! -d rhai-lsp ]]; then
-	git clone https://github.com/rhaiscript/rhai-lsp.git rhai-lsp
-fi
-(
-	cd rhai-lsp
-	git pull
-	cargo build --release || exit
-	cp target/release/rhai ../approot/bin/rhai
-)
+test -f approot/bin/rhai || \
+	cargo install --git https://github.com/rhaiscript/rhai-lsp.git --rev 2f1fcd73f43b909d1d5e96123516e599b9aaaa88 rhai-cli --root approot
 
 if [[ ! -e appimagetool-x86_64.AppImage ]]; then
 	wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
