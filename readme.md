@@ -29,3 +29,8 @@ This will create a container from the new image you prepared using `Dockerfile`,
 use it to build a copy of Helix. It will download a variety of LSPs, and install
 everything into the approot folder. Then, it will download a copy of `appimagetool`
 and wrap it all up into an executable that can be installed on your target system.
+
+## Mirror
+
+I have a [mirror](https://gitlab.com/jgroboredo/helix-appimage) to this repo
+in gitlab.
