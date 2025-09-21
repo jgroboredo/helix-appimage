@@ -10,12 +10,12 @@ rm -rf "${SCRIPT_DIR}/approot/node-$NODE_VER-linux-x64"
 wget -O- "https://nodejs.org/dist/$NODE_VER/node-$NODE_VER-linux-x64.tar.xz" | tar -JxvC "${SCRIPT_DIR}"/approot
 
 # Install helix
-if [[ ! -d helix-editor ]]; then
-	git clone https://github.com/jgroboredo/helix.git || exit
+if [[ ! -d helix ]]; then
+	git clone https://github.com/jgroboredo/helix.git "${SCRIPT_DIR}"/helix || exit
 fi
 
 (
-	pushd helix/helix-term || exit
+	pushd "${SCRIPT_DIR}"/helix/helix-term || exit
 	cargo build --release || exit
 	popd || exit
 	cp -r "${SCRIPT_DIR}"/helix/runtime "${SCRIPT_DIR}"/approot/usr/lib/helix/runtime 
