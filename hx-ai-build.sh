@@ -10,7 +10,7 @@ rm -rf "${SCRIPT_DIR}/approot/node-$NODE_VER-linux-x64"
 wget -O- "https://nodejs.org/dist/$NODE_VER/node-$NODE_VER-linux-x64.tar.xz" | tar -JxvC "${SCRIPT_DIR}"/approot
 
 # Install helix
-if [[ ! -d helix ]]; then
+if [[ ! -d ${SCRIPT_DIR}/helix ]]; then
 	git clone https://github.com/jgroboredo/helix.git "${SCRIPT_DIR}"/helix || exit
 fi
 
@@ -36,19 +36,25 @@ chmod +x "${SCRIPT_DIR}"/approot/AppRun
 
 export PATH="${SCRIPT_DIR}/approot/bin:${SCRIPT_DIR}/approot/node-${NODE_VER}-linux-x64/bin:$PATH"
 	"${SCRIPT_DIR}/approot/node-${NODE_VER}-linux-x64/bin/npm" i --prefix "${SCRIPT_DIR}/approot/node-$NODE_VER-linux-x64/" -g \
-	pyright vscode-langservers-extracted typescript typescript-language-server \
-	@vue/language-server yaml-language-server@next svelte-language-server \
-	dockerfile-language-server-nodejs @microsoft/compose-language-service bash-language-server \
-	@ansible/ansible-language-server perlnavigator-server intelephense awk-language-server emmet-ls
+	pyright \
+	vscode-langservers-extracted \
+	typescript \
+	typescript-language-server \
+	yaml-language-server@next \
+	dockerfile-language-server-nodejs \
+	@microsoft/compose-language-service \
+	bash-language-server \
+	@ansible/ansible-language-server
 
 rm -r "${SCRIPT_DIR}/approot/node-${NODE_VER}-linux-x64/include"
 
 test -f "${SCRIPT_DIR}/approot/bin/ruff" || \
 	cargo install --git https://github.com/astral-sh/ruff.git ruff --root "${SCRIPT_DIR}/approot"
 
-if [[ ! -e appimagetool-x86_64.AppImage ]]; then
-	wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
-	chmod +x appimagetool-x86_64.AppImage
+if [[ ! -e ${SCRIPT_DIR}/appimagetool-x86_64.AppImage ]]; then
+	wget -P ${SCRIPT_DIR} https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+	chmod +x ${SCRIPT_DIR}/appimagetool-x86_64.AppImage
 fi
-./appimagetool-x86_64.AppImage "${SCRIPT_DIR}/approot/" hx-ai
+
+${SCRIPT_DIR}/appimagetool-x86_64.AppImage "${SCRIPT_DIR}/approot/" ${SCRIPT_DIR}/hx-ai
 
